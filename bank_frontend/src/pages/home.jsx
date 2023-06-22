@@ -12,12 +12,13 @@ const Home = () => {
   return (
     <>
       <nav className="main-nav">
-        <a className="main-nav-logo" href="./index.html">
+        <a className="main-nav-logo"> <Link to="/">
           <img
             className="main-nav-logo-image"
             src={logo}
             alt="Argent Bank Logo"
           />
+          </Link>
           <h1 className="sr-only">Argent Bank</h1>
         </a>
         <div>
