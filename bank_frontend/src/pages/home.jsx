@@ -11,23 +11,6 @@ import securityicon from '../assets/icon-security.png';
 const Home = () => {
   return (
     <>
-      <nav className="main-nav">
-        <a className="main-nav-logo"> <Link to="/">
-          <img
-            className="main-nav-logo-image"
-            src={logo}
-            alt="Argent Bank Logo"
-          />
-          </Link>
-          <h1 className="sr-only">Argent Bank</h1>
-        </a>
-        <div>
-          <a className="main-nav-item" > <Link to="/sign-in">
-            <i className="fa fa-user-circle"></i>
-            Sign In</Link>
-          </a>
-        </div>
-      </nav>
       <main>
         <div className="hero">
           <section className="hero-content">
@@ -73,9 +56,6 @@ const Home = () => {
           </div>
         </section>
       </main>
-      <footer className="footer">
-        <p className="footer-text">Copyright 2020 Argent Bank</p>
-      </footer>
     </>
   );
 };

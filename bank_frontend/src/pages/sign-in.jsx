@@ -1,55 +1,98 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-
-import logo from '../assets/argentBankLogo.png'
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import getToken from "../service/getToken";
+import login from "../service/login";
+import { authActions } from "../store/auth";
+import { tokenActions } from "../store/token";
+import { profileActions } from "../store/profile";
 
 const SignIn = () => {
+
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    // Get the token's state
+    const token = useSelector((state) => state.token)
+    // Get the profile's state
+    const userProfile = useSelector((state) => state.profile)
+    //States used to display error message in case of invalid values in the form
+    const [isInvalidEmail, setIsInvalidEmail] = useState(false);
+    const [isInvalidPassword, setIsInvalidPassword] = useState(false);
+    // Retrieves the input values via onChange listener
+    const [email, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    //Function called when the form is submited
+    /**
+     * @returns {promise} token
+     * @param {string} event
+     */
+    const handleSubmit = async (event) => {
+        event.preventDefault()
+        // getToken is the service in charge of fetching the token
+        // Saves the response in const dataToken
+        const dataToken = await getToken(email, password);
+        // Status = 200, the token is saved in the state
+        if (dataToken.status === 200) {
+            dispatch(tokenActions.getToken(dataToken.body.token))
+            // If the state in charge of the taken is true
+            if (token) {
+                ;
+                // Update the auth state to true
+                dispatch(authActions.login())
+                // Calls and save the user datas in the const dataUser
+                const dataUser = await login(dataToken.body.token);
+
+                if (dataUser.status === 200) {
+                    dispatch(profileActions.getNames({ firstName: dataUser.body.firstName, lastName: dataUser.body.lastName }))
+                    if (userProfile) {
+                        navigate(`/profile/${dataUser.body.id}`)
+                    }
+                    else {
+                        navigate("/*")
+                    }
+                }
+            }
+
+        } else {
+            if (dataToken.message === "Error: User not found!") {
+                setIsInvalidEmail(true)
+            }
+            if (dataToken.message === "Error: Password is invalid") {
+                setIsInvalidPassword(true)
+            }
+        }
+
+
+    }
     return (
         <>
-            <nav className="main-nav">
-                <a className="main-nav-logo"> <Link to="/">
-                    <img
-                        className="main-nav-logo-image"
-                        src={logo}
-                        alt="Argent Bank Logo"
-                    />
-                </Link>
-                </a>
-                <div>
-                    <a className="main-nav-item" href="./sign-in.html">
-                        <i className="fa fa-user-circle"></i>
-                        Sign In
-                    </a>
-                </div>
-            </nav>
             <main className="main bg-dark">
                 <section className="sign-in-content">
                     <i className="fa fa-user-circle sign-in-icon"></i>
                     <h1>Sign In</h1>
-                    <form>
+                    <form className="form-signIn" onSubmit={handleSubmit}  >
                         <div className="input-wrapper">
                             <label htmlFor="username">Username</label>
-                            <input type="text" id="username" />
+                            <input type={"text"} id="username" onChange={(e) => setUsername(e.target.value)} />
+                            {isInvalidEmail && <span className="error">Error: User not found!</span>}
                         </div>
                         <div className="input-wrapper">
                             <label htmlFor="password">Password</label>
-                            <input type="password" id="password" />
+                            <input type={"password"} required id="password" onChange={(e) => setPassword(e.target.value)} />
+                            {isInvalidPassword && <span className="error">Error: Password is invalid</span>}
                         </div>
                         <div className="input-remember">
                             <input type="checkbox" id="remember-me" />
                             <label htmlFor="remember-me">Remember me</label>
                         </div>
-                        {/* PLACEHOLDER DUE TO STATIC SITE */}
-                        <a href="./user.html" className="sign-in-button">Sign In</a>
-                        {/* SHOULD BE THE BUTTON BELOW */}
-                        {/* <button className="sign-in-button">Sign In</button> */}
-                        {/*  */}
+                        <div className="form-signIn-submit">
+                        <input type={"submit"} value={"Sign In"} id="submitBtn"/>
+                    </div>
                     </form>
                 </section>
             </main>
-            <footer className="footer">
-                <p className="footer-text">Copyright 2020 Argent Bank</p>
-            </footer>
+
         </>
     );
 };
