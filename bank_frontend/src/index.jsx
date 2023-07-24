@@ -7,6 +7,7 @@ import store from './store/store';
 
 import Home from './pages/home';
 import SignIn from './pages/sign-in';
+import Profile from './pages/profile';
 import reportWebVitals from './reportWebVitals';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -22,6 +23,7 @@ root.render(
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/sign-in" element={<SignIn />} />
+        <Route path={"/profile/:id"} element={<Profile />} />
       </Routes>
       <Footer/>
     </Router>
