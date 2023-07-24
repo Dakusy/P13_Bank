@@ -38,7 +38,7 @@ const handleLogout = (e) => {
       </a>
       {isAuth ? (
         <div>
-          <div className="btn"> {profile.firstName}</div>
+          <div className="btn"> <Link to={"/profile/:id"}> {profile.firstName}</Link></div>
           <Link to={"/"} className="btn" onClick={handleLogout}> Logout</Link>
         </div>
       ):
