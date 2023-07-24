@@ -2,6 +2,8 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 
+import EditUser from "../service/editUser";
+
 /**
  * Page Profile
  * @returns {JSX} React Component
@@ -31,7 +33,7 @@ const Profile = () => {
    */
   const handleForm = () => {
     if (firstName !== "" && lastName !== "") {
-      //editUser(firstName, lastName, token);
+      EditUser(firstName, lastName, token);
       setDisplayForm(!displayForm);
       //dispatch(profileActions.getNames({firstName : firstName, lastName : lastName}));
     }
