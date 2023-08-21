@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 
 import EditUser from "../service/editUser";
+import Account from "../components/Account";
 
 /**
  * Page Profile
@@ -19,9 +20,9 @@ const Profile = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const dispatch = useDispatch();
- /**
-  * Changes the value of displayForm to its opposite whenever it's called
-  */
+  /**
+   * Changes the value of displayForm to its opposite whenever it's called
+   */
   const handleDisplayForm = () => {
     setDisplayForm(!displayForm);
   };
@@ -73,7 +74,10 @@ const Profile = () => {
             <button onClick={handleDisplayForm}>Edit Name</button>
           </div>
         )}
-   
+
+        <Account title="Argent Bank Checking (x8349)" amount="$2,082.79" description="Available Balance" />
+        <Account title="Argent Bank Savings (x6712)" amount="$10,928.42" description="Available Balance" />
+        <Account title="Argent Bank Credit Card (x8349)" amount="$184.30" description="Current Balance" />
       </main>
     </div>
   );

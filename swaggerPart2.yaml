@@ -5,30 +5,32 @@ info:
   title: "Argent Bank transactions API doc"
   termsOfService: "http://swagger.io/terms/"
 host: "localhost:3001"
-basePath: "/v1"
+basePath: "/"
 tags:
-- name: "transactions"
-  description: "Operations to manage transactions"
+  - name: "transactions"
+    description: "Operations to manage transactions"
 schemes:
-- "https"
-- "http"
+  - "https"
+  - "http"
 paths:
+  # Endpoint for fetching all user transactions
   /transactions:
     get:
+      # Security configuration for JWT authentication
       security:
         - Bearer: []
       tags:
-      - "transactions"
+        - "transactions"
       summary: "User Transactions API"
       description: "API for fetching all user transactions"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - in: "header"
-        name: "Authorization"
-        description: "Attach Bearer JWT token"
-        required: true
-        type: "string"
+        - in: "header"
+          name: "Authorization"
+          description: "Attach Bearer JWT token"
+          required: true
+          type: "string"
       responses:
         "200":
           description: "User transactions retrieved successfully"
@@ -39,45 +41,49 @@ paths:
         "500":
           description: "Internal Server Error"
     post:
+      # Security configuration for JWT authentication
       security: 
         - Bearer: []
       tags:
         - "transactions"
       summary: "Create a new transaction"
-      description: ""
+      description: "Endpoint to create a new transaction"
       consumes:
-      - "application/json"
+        - "application/json"
       produces:
-      - "application/json"
+        - "application/json"
       parameters:
-      - in: "header"
-        name: "Authorization"
-        description: "Attach Bearer JWT Token"
-        required: true
-        type: "string"
-      - in: "body"
-        name: "body"
-        description: "Update user profile attributes"
-        required: true
-        schema:
-          $ref: "#/definitions/TransactionDescription"
+        - in: "header"
+          name: "Authorization"
+          description: "Attach Bearer JWT Token"
+          required: true
+          type: "string"
+        - in: "body"
+          name: "body"
+          description: "Transaction details"
+          required: true
+          schema:
+            $ref: "#/definitions/TransactionDescription"
       responses:
         "201":
-          description: "Successfull Operation"
+          description: "Successful Operation"
         "400":
           description: "Invalid Transaction Description supplied"
         "404":
           description: "Transaction not found"
         "500":
           description: "Internal server error"
+
+  # Endpoint for getting a specific user transaction
   /transactions/{transactionId}:
     get:
+      # Security configuration for JWT authentication
       security:
         - Bearer: []
       tags:
         - "transactions"
       summary: "User unique transaction"
-      description: "Get transaction infos"
+      description: "Get transaction info"
       produces:
         - "application/json"
       parameters:
@@ -92,7 +98,7 @@ paths:
           type: "string"
       responses:
         "200":
-          description: "Successfull Operation"
+          description: "Successful Operation"
           schema:
             $ref: "#/definitions/TransactionsResponse"
         "400":
@@ -102,6 +108,7 @@ paths:
         "500":
           description: "Internal server error"
     put:
+      # Security configuration for JWT authentication
       security:
         - Bearer: []
       tags:
@@ -124,25 +131,26 @@ paths:
           type: "string"
         - in: "body"
           name: "body"
-          description: "Update user profile attributes"
+          description: "Transaction details to update"
           required: true
           schema:
             $ref: "#/definitions/TransactionDescription"
       responses:
         "200":
-          description: "Successfull Operation"
+          description: "Successful Operation"
         "400":
           description: "Invalid Transaction Description supplied"
         "404":
           description: "Transaction not found"
         "500":
           description: "Internal server error"
- 
+
 securityDefinitions:
   Bearer:
     type: "apiKey"
     name: "Authorization"
     in: "header"
+
 definitions:
   TransactionsResponse:
     type: "object"
@@ -188,5 +196,4 @@ definitions:
         description: "transaction's category"
       note:
         type: "string"
-        description: "user's notes for transaction"  
-  
+        description: "user's notes for transaction"
