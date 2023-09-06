@@ -1,12 +1,3 @@
-// Service for user data editing
-
-/**
- * Function for user firstName and lastName editing
- * @param {string} firstName
- * @param {string} lastName
- * @param {string} token
- * @returns {Promise} Updated user's data
- */
 const editUser = async (firstName, lastName, token) => {
   try {
     const response = await fetch("http://localhost:3001/api/v1/user/profile", {
