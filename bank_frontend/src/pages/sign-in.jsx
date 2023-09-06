@@ -71,7 +71,7 @@ const SignIn = () => {
     }
     return (
         <>
-            <main className="main bg-dark">
+            <main className="main_signin">
                 <section className="sign-in-content">
                 <img className = "sign-in-icon" src={circle} alt="Icon User" />
                     <h1>Sign In</h1>

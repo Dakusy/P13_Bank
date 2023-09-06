@@ -1,16 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import '../css/Global.css';
 
-import logo from '../assets/argentBankLogo.png'
 import chaticon from '../assets/icon-chat.png';
 import moneyicon from '../assets/icon-money.png';
 import securityicon from '../assets/icon-security.png';
 
+import '../css/Global.css';
+
 const Home = () => {
   return (
     <>
-      <main>
+      <main className="main_home">
         <div className="hero">
           <section className="hero-content">
             <h2 className="sr-only">Promoted Content</h2>

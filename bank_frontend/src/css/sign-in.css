@@ -1,10 +1,8 @@
-main {
-    display: flex;
+.main_signin {
+  display:flex;
+  background-color: #12002b;
 }
 
-.bg-dark {
-    flex: 1;
-}
 #submitBtn {
     display: block;
     width: 100%;
@@ -22,9 +20,9 @@ main {
     background-color: white;
     width: 300px;
     margin: 0 auto;
-    margin-top: 5rem;
+    margin-top: 3rem;
     padding: 2rem;
-    margin-bottom: 19.2rem;
+    margin-bottom: 21rem;
   }
   
   .sign-in-icon {
