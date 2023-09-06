@@ -8,6 +8,10 @@ import { authActions } from "../store/auth";
 import { tokenActions } from "../store/token";
 import { profileActions } from "../store/profile";
 
+import circle from '../assets/circle-user-solid.svg';
+
+import '../css/sign-in.css';
+
 const SignIn = () => {
 
     const navigate = useNavigate()
@@ -69,7 +73,7 @@ const SignIn = () => {
         <>
             <main className="main bg-dark">
                 <section className="sign-in-content">
-                    <i className="fa fa-user-circle sign-in-icon"></i>
+                <img className = "sign-in-icon" src={circle} alt="Icon User" />
                     <h1>Sign In</h1>
                     <form className="form-signIn" onSubmit={handleSubmit}  >
                         <div className="input-wrapper">

@@ -8,7 +8,7 @@ const Account = ({ title, amount, description }) => {
       <p className="account_amount">{amount}</p>
       <p className="account_description">{description}</p>
     </div>
-    <div className="account_transactions">
+    <div className="account_card cta">
       <button className="button_transactions">View transactions</button>
     </div>
   </section>
