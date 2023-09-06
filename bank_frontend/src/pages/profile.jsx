@@ -5,6 +5,8 @@ import { useState } from "react";
 import EditUser from "../service/editUser";
 import Account from "../components/Account";
 
+import '../css/profile.css';
+
 /**
  * Page Profile
  * @returns {JSX} React Component
