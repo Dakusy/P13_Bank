@@ -107,7 +107,7 @@ paths:
           description: "Transaction not found"
         "500":
           description: "Internal server error"
-    put:
+    patch:
       # Security configuration for JWT authentication
       security:
         - Bearer: []
